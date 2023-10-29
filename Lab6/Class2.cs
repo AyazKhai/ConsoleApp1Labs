@@ -91,32 +91,26 @@ namespace Lab6
     {
         public static void DirectChoose(queues arr)
         {
-            int min;
-            int jDub=0;
             PowerSuply ghost = new PowerSuply();
-            for (int i = 0; i < arr.Queues.Length; i++)
+            for (int i = 0; i < arr.Queues.Length-1; i++)
             {
-                min = arr[i].id;
-                for (int j = i+1 ; j < arr.Queues.Length; j++)
+
+                int minIndex = i;
+                for (int j = i + 1; j < arr.Queues.Length; j++)
                 {
-                    if (arr[j].id < min)
+                    if (arr[j].id < arr[minIndex].id)
                     {
-                        min = arr[j].id;
-                        ghost = arr[j];
-                        arr[j] = arr[i];
+                        minIndex = j;
+                    }
+                    if(minIndex != i) 
+                    {
+                        ghost = arr[minIndex]; 
+                        arr[minIndex] = arr[i]; 
                         arr[i] = ghost;
                     }
-                   
+
                 }
-                /*
-                if(jDub!=0) 
-                {
-                    ghost = arr[jDub];
-                    arr[jDub] = arr[i];
-                    arr[i] = ghost;
-                }
-                */
-                
+
             }
         }
     }
