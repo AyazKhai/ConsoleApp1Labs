@@ -60,7 +60,7 @@ namespace Lab6
                     return Queues[pos];
                 else
                 {
-                    throw new IndexOutOfRangeException("Вне диапазона");
+                     throw new IndexOutOfRangeException("Вне диапазона");
                 }
             }
             set
