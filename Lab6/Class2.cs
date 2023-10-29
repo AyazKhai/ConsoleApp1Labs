@@ -82,8 +82,9 @@ namespace Lab6
         {
             for (int i = 0; i < n; i++)
             {
-                Console.WriteLine($"{Queues[i].id} ");
+                Console.Write($"{Queues[i].id} ");
             }
+            Console.WriteLine("\n");
         }
     }
 
@@ -113,7 +114,6 @@ namespace Lab6
 
             }
         }
-
         public static void Bubbly(queues arr) 
         {
             PowerSuply ghost = new PowerSuply();
@@ -155,6 +155,84 @@ namespace Lab6
                 //arr[index].id = value;// Присвоение текущему элементу значения id
             }
         }
+        public static void ShakerSort(queues arr) 
+        {
+            bool swapped = true;// Флаг, означающий, что произошла перестановка элементов
+            int start = 0;
+            int end = arr.Queues.Length - 1;
+            PowerSuply ghost = new PowerSuply();
+
+            while (swapped)
+            {
+                swapped = false;
+
+                // Проход слева направо
+                for (int i = start; i < end; i++)
+                {
+                    if (arr[i].id > arr[i + 1].id)// Если предыдущий элемент больше следующего, меняем их местами
+                    {
+                        ghost = arr[i];
+                        arr[i] = arr[i + 1];
+                        arr[i + 1] = ghost;
+                        swapped = true;
+                    }
+                }
+
+                if (!swapped)// Если на проходе не было перестановок, массив уже отсортирован
+                {
+                    break;
+                }
+
+                swapped = false;
+                end--;
+
+                // Проход справа налево
+                for (int i = end - 1; i >= start; i--)
+                {
+                    if (arr[i].id > arr[i + 1].id)// Если предыдущий элемент больше следующего, меняем их местами
+                    {
+                        ghost = arr[i];
+                        arr[i] = arr[i + 1];
+                        arr[i + 1] = ghost;
+                        swapped = true;
+                    }
+                }
+
+                start++;
+            }
+        }
+        public static void ShallSort(queues arr) 
+        {
+            int n = arr.Queues.Length;
+            PowerSuply ghost = new PowerSuply();
+
+            // Выбор шага
+            int gap = n / 2;
+
+            // Пока шаг больше 0
+            while (gap > 0)
+            {
+                // Выполняем сортировку вставками с заданным шагом
+                for (int i = gap; i < n; i++)
+                {
+                    ghost = arr[i];
+                    int j = i;
+
+                    // Сдвигаем элементы на шаг назад, пока не найдем место для вставки
+                    while (j >= gap && arr[j - gap].id > ghost.id)
+                    {
+                        arr[j] = arr[j - gap];
+                        j -= gap;
+                    }
+
+                    arr[j] = ghost;
+                }
+                // Уменьшаем шаг
+                gap /= 2;
+            }
+        }
+
+        
     }
 }
 
