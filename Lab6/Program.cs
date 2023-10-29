@@ -17,10 +17,11 @@ namespace Lab6
             int n = Convert.ToInt32(Console.ReadLine());
             queues a = new queues(n);
             a.GetIds();
-
+            //a.GetRes();
             Console.WriteLine("\nSORTEEEDDD\n");
 
-            Sorts.DirectChoose(a);
+            Sorts.DirectConnection(a);
+            //a.GetRes();
             a.GetIds();
 
             Console.ReadKey();

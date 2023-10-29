@@ -113,6 +113,48 @@ namespace Lab6
 
             }
         }
+
+        public static void Bubbly(queues arr) 
+        {
+            PowerSuply ghost = new PowerSuply();
+            bool swapped;
+            for (int j = 0; j < arr.Queues.Length-1; j++)
+            {
+                swapped = false;
+                for (int i = 0; i < arr.Queues.Length - 1; i++)
+                {
+                    
+                    if (arr[i + 1].id < arr[i].id)
+                    {
+                        ghost = arr[i + 1];
+                        arr[i + 1] = arr[i];
+                        arr[i] = ghost;
+                        swapped = true;
+                    }
+
+                }
+                if(!swapped) { break; }
+
+            }
+            
+        }
+        public static void DirectConnection(queues arr) 
+        {
+            PowerSuply ghost = new PowerSuply();
+            for (int i = 0; i<arr.Queues.Length; i++) 
+            {
+                int value = arr[i].id;//// Значение id текущего элемента
+                int index = i;// Его индекс в массиве 
+                while ((index > 0) && (arr[index - 1].id > value)) // Цикл, выполняющий сдвиг элементов влево, пока предшествующий элемент больше текущего
+                {
+                    ghost = arr[index];
+                    arr[index] = arr[index - 1];
+                    arr[index - 1] = ghost;
+                    index--;
+                }
+                //arr[index].id = value;// Присвоение текущему элементу значения id
+            }
+        }
     }
 }
 
