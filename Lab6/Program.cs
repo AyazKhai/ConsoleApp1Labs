@@ -16,7 +16,10 @@ namespace Lab6
         {
             Console.WriteLine("Введите кол-во элементов");
             int n = Convert.ToInt32(Console.ReadLine());
-           
+           queues test = new queues(n);
+            test.GetFirm();
+            Sorts.BubblyFirm(test);
+            test.GetFirm();
             
             
             queues test1 = new queues(n);

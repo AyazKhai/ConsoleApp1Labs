@@ -12,8 +12,7 @@ namespace Lab6
         public string mark;
         public int id;
 
-        //private string[] firmArr = new string[6] { "CyberPower", "IPPON", "El-Power", "Philips", "Panasonic", "samsung" };
-        private string[] firmArr = new string[7] { "a","ab","abc","abb","dce","efe","abcc" };
+        private string[] firmArr = new string[13] { "CyberPower", "IPPON", "El-Power", "Philips", "Panasonic", "samsung","ЗИТ","ИМПУЛЬС","Парус электро", "РОТЕК", "ТК Профэнерджи", "Электромаш", "QTECH" };
         private string[] markArr = new string[4] { "Резервный(Off-Line)", "Линейно-интерактивный(Line-Interactive)", "с двойным преобразованием напряжения(On-Line)", "Cломанный" };
 
         public PowerSuply()
