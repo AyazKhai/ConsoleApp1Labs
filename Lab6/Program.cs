@@ -16,8 +16,9 @@ namespace Lab6
         {
             Console.WriteLine("Введите кол-во элементов");
             int n = Convert.ToInt32(Console.ReadLine());
-
-
+           
+            
+            
             queues test1 = new queues(n);
             queues test2 = new queues(n);
             queues test3 = new queues(n);
@@ -28,7 +29,7 @@ namespace Lab6
             Stopwatch BubblyTest = new Stopwatch();
             test1.GetIds();
             BubblyTest.Start();
-            Sorts.Bubbly(test1);
+            Sorts.BubblyId(test1);
             BubblyTest.Stop();
             test1.GetIds();
             Console.WriteLine($" Время сортировки пузырька {BubblyTest.ElapsedTicks}\n");
@@ -37,7 +38,7 @@ namespace Lab6
             Stopwatch ShallTest = new Stopwatch();
             test2.GetIds();
             ShallTest.Start();
-            Sorts.ShallSort(test2);
+            Sorts.ShallSortId(test2);
             ShallTest.Stop();
             test2.GetIds();
             Console.WriteLine($" МЕтод Шела {ShallTest.ElapsedTicks}\n");
@@ -46,7 +47,7 @@ namespace Lab6
             Stopwatch ShakerTest = new Stopwatch();
             test3.GetIds();
             ShakerTest.Start();
-            Sorts.ShakerSort(test3);
+            Sorts.ShakerSortId(test3);
           
             ShakerTest.Stop();
             test3.GetIds();
@@ -55,7 +56,7 @@ namespace Lab6
             Stopwatch DirectChooseTest = new Stopwatch();
             test4.GetIds();
             DirectChooseTest.Start();
-            Sorts.DirectChoose(test4);
+            Sorts.DirectChooseId(test4);
             DirectChooseTest.Stop();
             test4.GetIds();
             Console.WriteLine($" Метод DirectChoose {DirectChooseTest.ElapsedTicks}\n");
@@ -63,7 +64,7 @@ namespace Lab6
             Stopwatch DirectConnectionTest = new Stopwatch();
             test5.GetIds();
             DirectConnectionTest.Start();
-            Sorts.DirectConnection(test5);
+            Sorts.DirectConnectionId(test5);
            
             DirectConnectionTest.Stop();
             test5.GetIds();
