@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Common;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -12,6 +13,7 @@ namespace Lab6
         public string mark;
         public int id;
 
+        //private string[] firmArr = new string[13] { "cbb", "aa", "a", "abc", "abb", "aba", "acc", "abcd", "add", "bac", "baa", "bcc", "caaa" };
         private string[] firmArr = new string[13] { "CyberPower", "IPPON", "El-Power", "Philips", "Panasonic", "samsung","ЗИТ","ИМПУЛЬС","Парус электро", "РОТЕК", "ТК Профэнерджи", "Электромаш", "QTECH" };
         private string[] markArr = new string[4] { "Резервный(Off-Line)", "Линейно-интерактивный(Line-Interactive)", "с двойным преобразованием напряжения(On-Line)", "Cломанный" };
 
@@ -69,16 +71,16 @@ namespace Lab6
             }
         }
 
-        public void GetRes()
+        public void GetRes()//выводит результат(все поля объекта в строчку
         {
             for (int i = 0; i < n; i++)
             {
-                Console.WriteLine($"Источник автономного питания:\nФирма: {Queues[i].firm}\nМарка: {Queues[i].mark}\nИдентифиционный номер: {Queues[i].id}\n");
+                Console.WriteLine($"\nФирма: {Queues[i].firm} Марка: {Queues[i].mark} Идентифиционный номер: {Queues[i].id}\n");
             }
 
         }
 
-        public void GetIds() 
+         public void GetIds() //выводит поля id 
         {
             for (int i = 0; i < n; i++)
             {
@@ -87,7 +89,7 @@ namespace Lab6
             Console.WriteLine("\n");
         }
 
-        public void GetFirm()
+        public void GetFirm()//выводит поля firm
         {
             for (int i = 0; i < n; i++)
             {
@@ -95,6 +97,17 @@ namespace Lab6
             }
             Console.WriteLine("\n");
         }
+
+        public void CopyTo(queues obj1) 
+        {
+            for (int i = 0; i < n; i++) 
+            {
+                obj1.Queues[i].id = this.Queues[i].id;
+                obj1.Queues[i].firm = this.Queues[i].firm;
+                obj1.Queues[i].mark = this.Queues[i].mark;
+            }
+        }
+
     }
 
     public class Sorts
@@ -106,13 +119,13 @@ namespace Lab6
             {
 
                 int minIndex = i;
-                for (int j = i + 1; j < arr.Queues.Length; j++)
+                for (int j = i ; j < arr.Queues.Length; j++)
                 {
                     if (arr[j].id < arr[minIndex].id)
                     {
                         minIndex = j;
                     }
-                    if (minIndex != i)
+                    else if (minIndex != i)
                     {
                         ghost = arr[minIndex];
                         arr[minIndex] = arr[i];
@@ -220,7 +233,7 @@ namespace Lab6
             {
                 string value = arr[i].firm;//// Значение firm текущего элемента
                 int index = i;// Его индекс в массиве 
-                while ((index > 0) && ( arr[index-1].firm.CompareTo(value)>0)) // Цикл, выполняющий сдвиг элементов влево, пока предшествующий элемент больше текущего
+                while ((index > 0) && (arr[index - 1].firm.CompareTo(value)>0)) // Цикл, выполняющий сдвиг элементов влево, пока предшествующий элемент больше текущего
                 {
                     ghost = arr[index];
                     arr[index] = arr[index - 1];
@@ -384,6 +397,23 @@ namespace Lab6
                 gap /= 2;
             }
         }
+        /*
+        public enum TypeSorts 
+        {
+            one,two, three, four, five
+
+        }
+        
+        public static void ResultsTicks(queues arr, TypeSorts a)
+        {
+           
+            switch (a)
+            {
+                case one :
+                    Console.WriteLine("thursty");
+            }
+        }
+        */
     }
 }
 
