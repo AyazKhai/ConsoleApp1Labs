@@ -14,120 +14,90 @@ namespace Lab6
     internal class Program
     {
 
-        BinaryFormatter sw = new BinaryFormatter();
+       
         static void Main(string[] args)
         {
-            
+           /* 
+            BinaryFormatter sw = new BinaryFormatter();
+            //Серелизация
+           
+            using (FileStream fs = new FileStream("File_queue.txt", FileMode.Create, FileAccess.Write))
+            {
+                sw.Serialize(fs, q2);
+                Console.WriteLine($"Object has been serilized\n");
+            }
+            Console.ReadKey();
+            */
+
+            /*
+            queues test0 = new();
+            //Десерилизация
+            using (FileStream fs = new FileStream("File_queue.txt", FileMode.Open, FileAccess.Read))
+            {
+
+                while (fs.Position < fs.Length)
+                {
+                    test0 = (queues)sw.Deserialize(fs);
+                }
+            }
+
+            int n = test0.n;
+            */
+
+
+
+
             Console.WriteLine("Введите кол-во элементов");
             int n = Convert.ToInt32(Console.ReadLine());
- 
-            queues test0 = new queues(n);
-            
-            queues test1 = new(n);
-            queues test2 = new(n);
-            queues test3 = new(n);
-            queues test4 = new(n);
-            queues test5 = new(n);
+            queues test0 = new(n);
 
-            test0.CopyTo(test1);
-            test0.CopyTo(test2);
-            test0.CopyTo(test3);
-            test0.CopyTo(test4);
-            test0.CopyTo(test5);
-            // Sorts.ResultsTicks(test1, Sorts.TypeSorts.one);
+            queues test1 = new(n); test0.CopyTo(test1);
+            queues test2 = new(n); test0.CopyTo(test2);
+            queues test3 = new(n); test0.CopyTo(test3);
+            queues test4 = new(n); test0.CopyTo(test4);
+            queues test5 = new(n);test0.CopyTo(test5);
 
-            Stopwatch BubblyTest = new Stopwatch();
             test1.GetIds();
-            BubblyTest.Start();
-            Sorts.BubblyId(test1);
-            BubblyTest.Stop();
-            test1.GetIds();
-            Console.WriteLine($" Время сортировки пузырька {BubblyTest.ElapsedTicks}\n");
+            Sorts.DirectChooseId(test1);
+            test1.GetIds("\n");
 
-
-            Stopwatch ShallTest = new Stopwatch();
             test2.GetIds();
-            ShallTest.Start();
-            Sorts.ShallSortId(test2);
-            ShallTest.Stop();
-            test2.GetIds();
-            Console.WriteLine($" МЕтод Шела {ShallTest.ElapsedTicks}\n");
+            Sorts.BubblyId(test2);
+            test2.GetIds("\n");
 
-
-            Stopwatch ShakerTest = new Stopwatch();
             test3.GetIds();
-            ShakerTest.Start();
-            Sorts.ShakerSortId(test3);
-          
-            ShakerTest.Stop();
-            test3.GetIds();
-            Console.WriteLine($" МЕтод Шейкерной сортировки {ShakerTest.ElapsedTicks} \n");
+            Sorts.DirectConnectionId(test3);
+            test3.GetIds("\n");
 
-            Stopwatch DirectChooseTest = new Stopwatch();
             test4.GetIds();
-            DirectChooseTest.Start();
-            Sorts.DirectChooseId(test4);
-            DirectChooseTest.Stop();
-            test4.GetIds();
-            Console.WriteLine($" Метод DirectChoose {DirectChooseTest.ElapsedTicks}\n");
+            Sorts.ShakerSortId(test4);
+            test4.GetIds("\n");
 
-            Stopwatch DirectConnectionTest = new Stopwatch();
             test5.GetIds();
-            DirectConnectionTest.Start();
-            Sorts.DirectConnectionId(test5);
-           
-            DirectConnectionTest.Stop();
-            test5.GetIds();
-            Console.WriteLine($" DirectConnection {DirectConnectionTest.ElapsedTicks} \n");
+            Sorts.ShallSortId(test5);
+            test5.GetIds("\n");
 
-            ///////////////
             Console.WriteLine("\n");
-            ///
-            Stopwatch BubblyTestFirm = new Stopwatch();
+
             test1.GetFirm();
-            BubblyTestFirm.Start();
-            Sorts.BubblyFirm(test1);
-            BubblyTestFirm.Stop();
-            test1.GetFirm();
-            Console.WriteLine($" Время сортировки пузырька {BubblyTestFirm.ElapsedTicks}\n");
+            Sorts.DirectChooseFirm(test1);
+            test1.GetFirm("\n");
 
-
-            Stopwatch ShallTestFirm = new Stopwatch();
             test2.GetFirm();
-            ShallTestFirm.Start();
-            Sorts.ShallSortFirm(test2);
-            ShallTestFirm.Stop();
-            test2.GetFirm();
-            Console.WriteLine($" МЕтод Шела {ShallTestFirm.ElapsedTicks}\n");
+            Sorts.BubblyFirm(test2);
+            test2.GetFirm("\n");
 
-
-            Stopwatch ShakerTestFirm = new Stopwatch();
             test3.GetFirm();
-            ShakerTestFirm.Start();
-            Sorts.ShakerSortFirm(test3);
+            Sorts.DirectConnectionFirm(test3);
+            test3.GetFirm("\n");
 
-            ShakerTestFirm.Stop();
-            test3.GetFirm();
-            Console.WriteLine($" МЕтод Шейкерной сортировки {ShakerTestFirm.ElapsedTicks} \n");
-
-            Stopwatch DirectChooseTestFirm = new Stopwatch();
             test4.GetFirm();
-            DirectChooseTestFirm.Start();
-            Sorts.DirectChooseFirm(test4);
-            DirectChooseTestFirm.Stop();
-            test4.GetFirm();
-            Console.WriteLine($" Метод DirectChoose {DirectChooseTestFirm.ElapsedTicks}\n");
+            Sorts.ShakerSortFirm(test4);
+            test4.GetFirm("\n");
 
-            Stopwatch DirectConnectionTestFirm = new Stopwatch();
             test5.GetFirm();
-            DirectConnectionTestFirm.Start();
-            Sorts.DirectConnectionFirm(test5);
-
-           // test5.GetRes();
-            DirectConnectionTestFirm.Stop();
-            test5.GetFirm();
-            Console.WriteLine($" DirectConnection {DirectConnectionTestFirm.ElapsedTicks} \n");
-           // test5.GetRes();
+            Sorts.ShallSortFirm(test5);
+            test5.GetFirm("\n");
 
             Console.ReadKey();
         }
