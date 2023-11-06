@@ -13,8 +13,8 @@ namespace Lab6
         public string mark;
         public int id;
 
-        //private string[] firmArr = new string[13] { "cbb", "aa", "a", "abc", "abb", "aba", "acc", "abcd", "add", "bac", "baa", "bcc", "caaa" };
-        private string[] firmArr = new string[13] { "CyberPower", "IPPON", "El-Power", "Philips", "Panasonic", "samsung","ЗИТ","ИМПУЛЬС","Парус электро", "РОТЕК", "ТК Профэнерджи", "Электромаш", "QTECH" };
+        private string[] firmArr = new string[13] { "cbb", "aa", "a", "abc", "abb", "aba", "acc", "abcd", "add", "bac", "baa", "bcc", "caaa" };
+        //private string[] firmArr = new string[13] { "CyberPower", "IPPON", "El-Power", "Philips", "Panasonic", "samsung","ЗИТ","ИМПУЛЬС","Парус электро", "РОТЕК", "ТК Профэнерджи", "Электромаш", "QTECH" };
         private string[] markArr = new string[4] { "Резервный(Off-Line)", "Линейно-интерактивный(Line-Interactive)", "с двойным преобразованием напряжения(On-Line)", "Cломанный" };
 
         public PowerSuply()
@@ -125,15 +125,13 @@ namespace Lab6
                     {
                         minIndex = j;
                     }
-                    else if (minIndex != i)
-                    {
-                        ghost = arr[minIndex];
-                        arr[minIndex] = arr[i];
-                        arr[i] = ghost;
-                    }
-
                 }
-
+                if (minIndex != i)
+                {
+                    ghost = arr[minIndex];
+                    arr[minIndex] = arr[i];
+                    arr[i] = ghost;
+                }
             }
         }
         public static void DirectChooseFirm(queues arr)
@@ -148,13 +146,12 @@ namespace Lab6
                     {
                         minIndex = j;
                     }
-                    if (minIndex != i)
-                    {
-                        ghost = arr[minIndex];
-                        arr[minIndex] = arr[i];
-                        arr[i] = ghost;
-                    }
-
+                }
+                if (minIndex != i)
+                {
+                    ghost = arr[minIndex];
+                    arr[minIndex] = arr[i];
+                    arr[i] = ghost;
                 }
 
             }

@@ -20,20 +20,7 @@ namespace Lab6
             
             Console.WriteLine("Введите кол-во элементов");
             int n = Convert.ToInt32(Console.ReadLine());
-            /*
-            BinaryFormatter sw = new BinaryFormatter();
-            queues test0 = new queues(n);
-            using (FileStream fs = new FileStream("C:\\Users\\ayazh\\OneDrive\\Рабочий стол\\GItt\\ConsoleApp1Labs\\Lab5.3\\bin\\Debug\\net6.0\\File_queue.txt", FileMode.Open, FileAccess.Read))
-            {
-
-                while (fs.Position < fs.Length)
-                {
-                    test0 = (queues)sw.Deserialize(fs);
-                    Console.WriteLine($"Object has been deserialized\n");
-                }
-            }
-            */
-
+ 
             queues test0 = new queues(n);
             
             queues test1 = new(n);
