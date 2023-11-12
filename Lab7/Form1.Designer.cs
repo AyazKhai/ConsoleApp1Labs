@@ -28,33 +28,34 @@
         /// </summary>
         private void InitializeComponent()
         {
-            checkBox1 = new CheckBox();
+            DirectChooseId = new CheckBox();
             checkBox2 = new CheckBox();
             checkBox3 = new CheckBox();
             checkBox4 = new CheckBox();
             checkBox5 = new CheckBox();
-            richTextBox1 = new RichTextBox();
             panel1 = new Panel();
             label1 = new Label();
             trackBar1 = new TrackBar();
             button2 = new Button();
             button1 = new Button();
-            richTextBox2 = new RichTextBox();
             openFileDialog1 = new OpenFileDialog();
+            richTextBox2 = new RichTextBox();
+            richTextBox1 = new RichTextBox();
             panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)trackBar1).BeginInit();
             SuspendLayout();
             // 
-            // checkBox1
+            // DirectChooseId
             // 
-            checkBox1.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Right;
-            checkBox1.AutoSize = true;
-            checkBox1.Location = new Point(51, 29);
-            checkBox1.Name = "checkBox1";
-            checkBox1.Size = new Size(83, 19);
-            checkBox1.TabIndex = 0;
-            checkBox1.Text = "checkBox1";
-            checkBox1.UseVisualStyleBackColor = true;
+            DirectChooseId.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Right;
+            DirectChooseId.AutoSize = true;
+            DirectChooseId.Location = new Point(27, 29);
+            DirectChooseId.Name = "DirectChooseId";
+            DirectChooseId.Size = new Size(107, 19);
+            DirectChooseId.TabIndex = 0;
+            DirectChooseId.Text = "DirectChooseId";
+            DirectChooseId.UseVisualStyleBackColor = true;
+            DirectChooseId.CheckedChanged += DirectChooseId_CheckedChanged;
             // 
             // checkBox2
             // 
@@ -100,16 +101,6 @@
             checkBox5.Text = "checkBox5";
             checkBox5.UseVisualStyleBackColor = true;
             // 
-            // richTextBox1
-            // 
-            richTextBox1.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
-            richTextBox1.Location = new Point(0, 0);
-            richTextBox1.Name = "richTextBox1";
-            richTextBox1.Size = new Size(618, 219);
-            richTextBox1.TabIndex = 6;
-            richTextBox1.Text = "";
-            richTextBox1.TextChanged += richTextBox1_TextChanged;
-            // 
             // panel1
             // 
             panel1.BackColor = SystemColors.ControlDarkDark;
@@ -117,7 +108,7 @@
             panel1.Controls.Add(trackBar1);
             panel1.Controls.Add(button2);
             panel1.Controls.Add(button1);
-            panel1.Controls.Add(checkBox1);
+            panel1.Controls.Add(DirectChooseId);
             panel1.Controls.Add(checkBox2);
             panel1.Controls.Add(checkBox3);
             panel1.Controls.Add(checkBox5);
@@ -131,11 +122,11 @@
             // label1
             // 
             label1.AutoSize = true;
-            label1.Location = new Point(51, 347);
+            label1.Location = new Point(73, 349);
             label1.Name = "label1";
-            label1.Size = new Size(38, 15);
+            label1.Size = new Size(13, 15);
             label1.TabIndex = 9;
-            label1.Text = "label1";
+            label1.Text = "1";
             label1.Click += label1_Click;
             // 
             // trackBar1
@@ -168,29 +159,44 @@
             button1.TabIndex = 5;
             button1.Text = "button1";
             button1.UseVisualStyleBackColor = true;
-            // 
-            // richTextBox2
-            // 
-            richTextBox2.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
-            richTextBox2.Location = new Point(0, 225);
-            richTextBox2.Name = "richTextBox2";
-            richTextBox2.Size = new Size(618, 225);
-            richTextBox2.TabIndex = 8;
-            richTextBox2.Text = "";
+            button1.Click += button1_Click;
             // 
             // openFileDialog1
             // 
             openFileDialog1.FileName = "openFileDialog1";
             // 
+            // richTextBox2
+            // 
+            richTextBox2.Dock = DockStyle.Right;
+            richTextBox2.Location = new Point(338, 0);
+            richTextBox2.Name = "richTextBox2";
+            richTextBox2.Size = new Size(286, 450);
+            richTextBox2.TabIndex = 8;
+            richTextBox2.Text = "";
+            // 
+            // richTextBox1
+            // 
+            richTextBox1.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            richTextBox1.Location = new Point(0, 0);
+            richTextBox1.Name = "richTextBox1";
+            richTextBox1.ReadOnly = true;
+            richTextBox1.Size = new Size(332, 450);
+            richTextBox1.TabIndex = 6;
+            richTextBox1.Text = "";
+            richTextBox1.TextChanged += richTextBox1_TextChanged;
+            // 
             // Form1
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
+            BackColor = SystemColors.Control;
+            BackgroundImageLayout = ImageLayout.None;
             ClientSize = new Size(800, 450);
             Controls.Add(richTextBox2);
             Controls.Add(panel1);
             Controls.Add(richTextBox1);
             Name = "Form1";
+            StartPosition = FormStartPosition.CenterScreen;
             Text = "Form1";
             panel1.ResumeLayout(false);
             panel1.PerformLayout();
@@ -200,18 +206,18 @@
 
         #endregion
 
-        private CheckBox checkBox1;
+        private CheckBox DirectChooseId;
         private CheckBox checkBox2;
         private CheckBox checkBox3;
         private CheckBox checkBox4;
         private CheckBox checkBox5;
-        private RichTextBox richTextBox1;
         private Panel panel1;
-        private RichTextBox richTextBox2;
         private Button button1;
         private Button button2;
         private OpenFileDialog openFileDialog1;
         private Label label1;
         private TrackBar trackBar1;
+        public RichTextBox richTextBox2;
+        public RichTextBox richTextBox1;
     }
 }

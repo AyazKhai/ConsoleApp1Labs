@@ -1,9 +1,15 @@
+using System.Security.Cryptography.X509Certificates;
+
 namespace Lab7
 {
     public partial class Form1 : Form
     {
+        queues obj = new();
+        int n;
+        
         public Form1()
         {
+
             InitializeComponent();
             //сделать фиксированный размер окна формы
 
@@ -18,7 +24,10 @@ namespace Lab7
 
         private void button2_Click(object sender, EventArgs e)
         {
-            queues obj = new queues();
+            obj = new queues(n);
+            obj.GetRes(richTextBox1);
+            //richTextBox1.AppendText
+
 
         }
 
@@ -41,7 +50,23 @@ namespace Lab7
 
         private void trackBar1_Scroll(object sender, EventArgs e)
         {
-            trackBar1.Up
+            n = trackBar1.Value;
+            label1.Text = Convert.ToString((int)n);
+        }
+
+        private void DirectChooseId_CheckedChanged(object sender, EventArgs e)
+        {
+            Sorts.DirectChooseId(obj);
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            obj.GetRes(richTextBox2);
+        }
+
+        private void splitContainer1_Panel1_Paint(object sender, PaintEventArgs e)
+        {
+
         }
     }
 }

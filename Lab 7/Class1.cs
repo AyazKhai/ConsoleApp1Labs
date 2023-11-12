@@ -6,6 +6,7 @@ using System.Linq;
 using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Threading.Tasks;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.TaskbarClock;
 
 namespace Lab7
 {
@@ -19,7 +20,7 @@ namespace Lab7
         // private string[] firmArr = new string[13] { "cbb", "aa", "a", "abc", "abb", "aba", "acc", "abcd", "add", "bac", "baa", "bcc", "caaa" };
         private string[] firmArr = new string[13] { "CyberPower", "IPPON", "El-Power", "Philips", "Panasonic", "samsung", "ЗИТ", "ИМПУЛЬС", "Парус электро", "РОТЕК", "ТК Профэнерджи", "Электромаш", "QTECH" };
         private string[] markArr = new string[4] { "Резервный(Off-Line)", "Линейно-интерактивный(Line-Interactive)", "с двойным преобразованием напряжения(On-Line)", "Cломанный" };
-
+        private int[] idArr = new int[4] { 1, 2, 3, 4 };
         public PowerSuply()
         {
             Random random = new Random();
@@ -31,6 +32,12 @@ namespace Lab7
             id = idRan.Next(100);
             //only "D", "d", "N", "n", "P", "p", "B", "b", "X" or "x"."
         }
+        public PowerSuply(string firm, string mark, int id) 
+        {
+            this.firm = firm;
+            this.mark = mark;
+            this.id = id;
+        }
 
 
     }
@@ -38,8 +45,7 @@ namespace Lab7
     public class queues
     {
         public readonly int n = 1;
-        public PowerSuply[] Queues;
-
+        public PowerSuply[] Queues; 
         public queues()
         {
             Queues = new PowerSuply[n];
@@ -55,6 +61,23 @@ namespace Lab7
             for (int i = 0; i < n; i++)
             {
                 Queues[i] = new PowerSuply();
+            }
+        }
+        public queues(string[] firmArr, string[] markArr, int[] idArr) 
+        {
+            
+            if (firmArr.Length != markArr.Length || markArr.Length != idArr.Length)
+            {
+                throw new ArgumentException("Ошибка");
+            }
+            else 
+            {
+                this.n = firmArr.Length;
+                Queues = new PowerSuply[firmArr.Length];
+                for (int i = 0; i < firmArr.Length; i++) 
+                {
+                    Queues[i] = new PowerSuply(firmArr[i], markArr[i], idArr[i]);
+                }
             }
         }
 
@@ -140,8 +163,22 @@ namespace Lab7
 
     }
 
+    
     public class Sorts
     {
+        private static double _time;
+        public static double Time 
+        {
+            get 
+            { 
+                return _time;
+            }
+            set 
+            {
+                _time = value;
+            }
+        }
+        
         public static void DirectChooseId(queues arr)
         {
 
@@ -166,6 +203,7 @@ namespace Lab7
                 }
             }
             stopwatch.Stop();
+            Sorts.Time = stopwatch.Elapsed.TotalMilliseconds;
             Console.WriteLine($" Метод DirectChoose {stopwatch.Elapsed.TotalMilliseconds} миллисекунд ");
         }
         public static void DirectChooseFirm(queues arr)
@@ -191,6 +229,7 @@ namespace Lab7
 
             }
             stopwatch.Stop();
+            Sorts.Time = stopwatch.Elapsed.TotalMilliseconds;
             Console.WriteLine($" Метод DirectChoose {stopwatch.Elapsed.TotalMilliseconds} миллисекунд ");
         }
 
@@ -218,6 +257,7 @@ namespace Lab7
 
             }
             stopwatch.Stop();
+            Sorts.Time = stopwatch.Elapsed.TotalMilliseconds;
             Console.WriteLine($" Метод Bubbly {stopwatch.Elapsed.TotalMilliseconds} миллисекунд ");
 
         }
@@ -245,6 +285,7 @@ namespace Lab7
 
             }
             stopwatch.Stop();
+            Sorts.Time = stopwatch.Elapsed.TotalMilliseconds;
             Console.WriteLine($" Метод Bubbly {stopwatch.Elapsed.TotalMilliseconds} ");
 
         }
@@ -267,6 +308,7 @@ namespace Lab7
                 //arr[index].id = value;// Присвоение текущему элементу значения id
             }
             stopwatch.Stop();
+            Sorts.Time = stopwatch.Elapsed.TotalMilliseconds;
             Console.WriteLine($" Метод DirectConnection {stopwatch.Elapsed.TotalMilliseconds} миллисекунд ");
         }
         public static void DirectConnectionFirm(queues arr)
@@ -286,6 +328,7 @@ namespace Lab7
                 }
             }
             stopwatch.Stop();
+            Sorts.Time = stopwatch.Elapsed.TotalMilliseconds;
             Console.WriteLine($" Метод DirectConnection {stopwatch.Elapsed.TotalMilliseconds} миллисекунд ");
         }
 
@@ -336,6 +379,7 @@ namespace Lab7
                 start++;
             }
             stopwatch.Stop();
+            Sorts.Time = stopwatch.Elapsed.TotalMilliseconds;
             Console.WriteLine($" Метод ShakerSort {stopwatch.Elapsed.TotalMilliseconds} миллисекунд ");
         }
         public static void ShakerSortFirm(queues arr)
@@ -385,6 +429,7 @@ namespace Lab7
                 start++;
             }
             stopwatch.Stop();
+            Sorts.Time = stopwatch.Elapsed.TotalMilliseconds;
             Console.WriteLine($" Метод ShakerSort {stopwatch.Elapsed.TotalMilliseconds} миллисекунд ");
         }
 
@@ -452,27 +497,11 @@ namespace Lab7
                 gap /= 2;
             }
             stopwatch.Stop();
+            Sorts.Time = stopwatch.Elapsed.TotalMilliseconds;
             Console.WriteLine($" Метод ShallSort {stopwatch.Elapsed.TotalMilliseconds} миллисекунд ");
         }
 
 
-        /*
-        public enum TypeSorts 
-        {
-            one,two, three, four, five
-
-        }
-        
-        public static void ResultsTicks(queues arr, TypeSorts a)
-        {
-           
-            switch (a)
-            {
-                case one :
-                    Console.WriteLine("thursty");
-            }
-        }
-        */
     }
 }
 
