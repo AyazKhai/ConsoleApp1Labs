@@ -17,36 +17,6 @@ namespace Lab6
        
         static void Main(string[] args)
         {
-           /* 
-            BinaryFormatter sw = new BinaryFormatter();
-            //Серелизация
-           
-            using (FileStream fs = new FileStream("File_queue.txt", FileMode.Create, FileAccess.Write))
-            {
-                sw.Serialize(fs, q2);
-                Console.WriteLine($"Object has been serilized\n");
-            }
-            Console.ReadKey();
-            */
-
-            /*
-            queues test0 = new();
-            //Десерилизация
-            using (FileStream fs = new FileStream("File_queue.txt", FileMode.Open, FileAccess.Read))
-            {
-
-                while (fs.Position < fs.Length)
-                {
-                    test0 = (queues)sw.Deserialize(fs);
-                }
-            }
-
-            int n = test0.n;
-            */
-
-
-
-
             Console.WriteLine("Введите кол-во элементов");
             int n = Convert.ToInt32(Console.ReadLine());
             queues test0 = new(n);
@@ -101,6 +71,7 @@ namespace Lab6
 
             Console.ReadKey();
         }
+
     }
 }
 
