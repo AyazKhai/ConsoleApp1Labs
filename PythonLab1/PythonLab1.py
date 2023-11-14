@@ -1,10 +1,11 @@
-class PowerSuply:
+class PowerSupply:
     firm = "Samsung"
+    mark = "Z310Dual"
     capcity = 3000
 
-    def init(self, mark):
-        self.mark = mark
+    def __init__(self):
+        self.id = 0
 
-p = PowerSuply("Z310Dual")
-print("Ёмкость источника бесперибойного питания:", p.capcity)
-print("Название фирмы:", PowerSuply.firm)
+if __name__ == "__main__":
+    print("Ёмкость источника бесперибойного питания: ", PowerSupply.capcity)
+    print("Название фирмы: ", PowerSupply.firm)

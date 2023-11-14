@@ -6,8 +6,9 @@ using System.Linq;
 using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Threading.Tasks;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.TaskbarClock;
 
-namespace Lab6
+namespace Lab7
 {
     [Serializable]
     public class PowerSuply
@@ -16,10 +17,10 @@ namespace Lab6
         public string mark;
         public int id;
 
-       // private string[] firmArr = new string[13] { "cbb", "aa", "a", "abc", "abb", "aba", "acc", "abcd", "add", "bac", "baa", "bcc", "caaa" };
-        private string[] firmArr = new string[13] { "CyberPower", "IPPON", "El-Power", "Philips", "Panasonic", "samsung","ЗИТ","ИМПУЛЬС","Парус электро", "РОТЕК", "ТК Профэнерджи", "Электромаш", "QTECH" };
+        // private string[] firmArr = new string[13] { "cbb", "aa", "a", "abc", "abb", "aba", "acc", "abcd", "add", "bac", "baa", "bcc", "caaa" };
+        private string[] firmArr = new string[13] { "CyberPower", "IPPON", "El-Power", "Philips", "Panasonic", "samsung", "ЗИТ", "ИМПУЛЬС", "Парус электро", "РОТЕК", "ТК Профэнерджи", "Электромаш", "QTECH" };
         private string[] markArr = new string[4] { "Резервный(Off-Line)", "Линейно-интерактивный(Line-Interactive)", "с двойным преобразованием напряжения(On-Line)", "Cломанный" };
-
+        private int[] idArr = new int[4] { 1, 2, 3, 4 };
         public PowerSuply()
         {
             Random random = new Random();
@@ -31,6 +32,12 @@ namespace Lab6
             id = idRan.Next(100);
             //only "D", "d", "N", "n", "P", "p", "B", "b", "X" or "x"."
         }
+        public PowerSuply(string firm, string mark, int id) 
+        {
+            this.firm = firm;
+            this.mark = mark;
+            this.id = id;
+        }
 
 
     }
@@ -38,8 +45,7 @@ namespace Lab6
     public class queues
     {
         public readonly int n = 1;
-        public PowerSuply[] Queues;
-
+        public PowerSuply[] Queues; 
         public queues()
         {
             Queues = new PowerSuply[n];
@@ -57,6 +63,23 @@ namespace Lab6
                 Queues[i] = new PowerSuply();
             }
         }
+        public queues(string[] firmArr, string[] markArr, int[] idArr) 
+        {
+            
+            if (firmArr.Length != markArr.Length || markArr.Length != idArr.Length)
+            {
+                throw new ArgumentException("Ошибка");
+            }
+            else 
+            {
+                this.n = firmArr.Length;
+                Queues = new PowerSuply[firmArr.Length];
+                for (int i = 0; i < firmArr.Length; i++) 
+                {
+                    Queues[i] = new PowerSuply(firmArr[i], markArr[i], idArr[i]);
+                }
+            }
+        }
 
         public PowerSuply this[int pos]
         {
@@ -67,7 +90,7 @@ namespace Lab6
                     return Queues[pos];
                 else
                 {
-                     throw new IndexOutOfRangeException("Вне диапазона");
+                    throw new IndexOutOfRangeException("Вне диапазона");
                 }
             }
             set
@@ -81,6 +104,15 @@ namespace Lab6
             for (int i = 0; i < n; i++)
             {
                 Console.WriteLine($"\nФирма: {Queues[i].firm}; Марка: {Queues[i].mark}; Идентифиционный номер: {Queues[i].id}\n");
+            }
+
+        }
+
+        public void GetRes(RichTextBox richTextBox)//выводит результат(все поля объекта в строчку
+        {
+            for (int i = 0; i < n; i++)
+            {
+                richTextBox.AppendText($"\nФирма: {Queues[i].firm}; Марка: {Queues[i].mark}; Идентифиционный номер: {Queues[i].id}\n");
             }
 
         }
@@ -111,7 +143,7 @@ namespace Lab6
         }
         public void GetFirm(string str)//выводит поля firm
         {
-            
+
             for (int i = 0; i < n; i++)
             {
                 Console.Write($"{Queues[i].firm} ");
@@ -119,9 +151,9 @@ namespace Lab6
             Console.WriteLine(str);
         }
 
-        public void CopyTo(queues obj1) 
+        public void CopyTo(queues obj1)
         {
-            for (int i = 0; i < n; i++) 
+            for (int i = 0; i < n; i++)
             {
                 obj1.Queues[i].id = this.Queues[i].id;
                 obj1.Queues[i].firm = this.Queues[i].firm;
@@ -131,12 +163,26 @@ namespace Lab6
 
     }
 
+    
     public class Sorts
     {
+        private static double _time;
+        public static double Time 
+        {
+            get 
+            { 
+                return _time;
+            }
+            set 
+            {
+                _time = value;
+            }
+        }
+        
         public static void DirectChooseId(queues arr)
         {
 
-           Stopwatch stopwatch = Stopwatch.StartNew();
+            Stopwatch stopwatch = Stopwatch.StartNew();
             PowerSuply ghost = new PowerSuply();
             for (int i = 0; i < arr.Queues.Length - 1; i++)
             {
@@ -157,6 +203,7 @@ namespace Lab6
                 }
             }
             stopwatch.Stop();
+            Sorts.Time = stopwatch.Elapsed.TotalMilliseconds;
             Console.WriteLine($" Метод DirectChoose {stopwatch.Elapsed.TotalMilliseconds} миллисекунд ");
         }
         public static void DirectChooseFirm(queues arr)
@@ -168,7 +215,7 @@ namespace Lab6
                 int minIndex = i;
                 for (int j = i + 1; j < arr.Queues.Length; j++)
                 {
-                    if (arr[j].firm.CompareTo(arr[minIndex].firm)<0)
+                    if (arr[j].firm.CompareTo(arr[minIndex].firm) < 0)
                     {
                         minIndex = j;
                     }
@@ -182,20 +229,21 @@ namespace Lab6
 
             }
             stopwatch.Stop();
+            Sorts.Time = stopwatch.Elapsed.TotalMilliseconds;
             Console.WriteLine($" Метод DirectChoose {stopwatch.Elapsed.TotalMilliseconds} миллисекунд ");
         }
-        
-        public static void BubblyId(queues arr) 
+
+        public static void BubblyId(queues arr)
         {
             Stopwatch stopwatch = Stopwatch.StartNew();
             PowerSuply ghost = new PowerSuply();
             bool swapped;
-            for (int j = 0; j < arr.Queues.Length-1; j++)
+            for (int j = 0; j < arr.Queues.Length - 1; j++)
             {
                 swapped = false;
                 for (int i = 0; i < arr.Queues.Length - 1; i++)
                 {
-                    
+
                     if (arr[i + 1].id < arr[i].id)
                     {
                         ghost = arr[i + 1];
@@ -205,10 +253,11 @@ namespace Lab6
                     }
 
                 }
-                if(!swapped) { break; }
+                if (!swapped) { break; }
 
             }
             stopwatch.Stop();
+            Sorts.Time = stopwatch.Elapsed.TotalMilliseconds;
             Console.WriteLine($" Метод Bubbly {stopwatch.Elapsed.TotalMilliseconds} миллисекунд ");
 
         }
@@ -223,7 +272,7 @@ namespace Lab6
                 for (int i = 0; i < arr.Queues.Length - 1; i++)
                 {
 
-                    if (arr[i + 1].firm.CompareTo(arr[i].firm)<0)
+                    if (arr[i + 1].firm.CompareTo(arr[i].firm) < 0)
                     {
                         ghost = arr[i + 1];
                         arr[i + 1] = arr[i];
@@ -236,15 +285,16 @@ namespace Lab6
 
             }
             stopwatch.Stop();
+            Sorts.Time = stopwatch.Elapsed.TotalMilliseconds;
             Console.WriteLine($" Метод Bubbly {stopwatch.Elapsed.TotalMilliseconds} ");
 
         }
 
-        public static void DirectConnectionId(queues arr) 
+        public static void DirectConnectionId(queues arr)
         {
             Stopwatch stopwatch = Stopwatch.StartNew();
             PowerSuply ghost = new PowerSuply();
-            for (int i = 0; i<arr.Queues.Length; i++) 
+            for (int i = 0; i < arr.Queues.Length; i++)
             {
                 int value = arr[i].id;//// Значение id текущего элемента
                 int index = i;// Его индекс в массиве 
@@ -258,6 +308,7 @@ namespace Lab6
                 //arr[index].id = value;// Присвоение текущему элементу значения id
             }
             stopwatch.Stop();
+            Sorts.Time = stopwatch.Elapsed.TotalMilliseconds;
             Console.WriteLine($" Метод DirectConnection {stopwatch.Elapsed.TotalMilliseconds} миллисекунд ");
         }
         public static void DirectConnectionFirm(queues arr)
@@ -268,7 +319,7 @@ namespace Lab6
             {
                 string value = arr[i].firm;//// Значение firm текущего элемента
                 int index = i;// Его индекс в массиве 
-                while ((index > 0) && (arr[index - 1].firm.CompareTo(value)>0)) // Цикл, выполняющий сдвиг элементов влево, пока предшествующий элемент больше текущего
+                while ((index > 0) && (arr[index - 1].firm.CompareTo(value) > 0)) // Цикл, выполняющий сдвиг элементов влево, пока предшествующий элемент больше текущего
                 {
                     ghost = arr[index];
                     arr[index] = arr[index - 1];
@@ -277,10 +328,11 @@ namespace Lab6
                 }
             }
             stopwatch.Stop();
+            Sorts.Time = stopwatch.Elapsed.TotalMilliseconds;
             Console.WriteLine($" Метод DirectConnection {stopwatch.Elapsed.TotalMilliseconds} миллисекунд ");
         }
 
-        public static void ShakerSortId(queues arr) 
+        public static void ShakerSortId(queues arr)
         {
             Stopwatch stopwatch = Stopwatch.StartNew();
             bool swapped = true;// Флаг, означающий, что произошла перестановка элементов
@@ -327,6 +379,7 @@ namespace Lab6
                 start++;
             }
             stopwatch.Stop();
+            Sorts.Time = stopwatch.Elapsed.TotalMilliseconds;
             Console.WriteLine($" Метод ShakerSort {stopwatch.Elapsed.TotalMilliseconds} миллисекунд ");
         }
         public static void ShakerSortFirm(queues arr)
@@ -344,7 +397,7 @@ namespace Lab6
                 // Проход слева направо
                 for (int i = start; i < end; i++)
                 {
-                    if (arr[i].firm.CompareTo(arr[i+1].firm)>0)// Если предыдущий элемент больше следующего, меняем их местами
+                    if (arr[i].firm.CompareTo(arr[i + 1].firm) > 0)// Если предыдущий элемент больше следующего, меняем их местами
                     {
                         ghost = arr[i];
                         arr[i] = arr[i + 1];
@@ -376,10 +429,11 @@ namespace Lab6
                 start++;
             }
             stopwatch.Stop();
+            Sorts.Time = stopwatch.Elapsed.TotalMilliseconds;
             Console.WriteLine($" Метод ShakerSort {stopwatch.Elapsed.TotalMilliseconds} миллисекунд ");
         }
 
-        public static void ShallSortId(queues arr) 
+        public static void ShallSortId(queues arr)
         {
             Stopwatch stopwatch = Stopwatch.StartNew();
             int n = arr.Queues.Length;
@@ -431,7 +485,7 @@ namespace Lab6
                     int j = i;
 
                     // Сдвигаем элементы на шаг назад, пока не найдем место для вставки
-                    while (j >= gap && (arr[j-gap].firm.CompareTo(ghost.firm)>0))
+                    while (j >= gap && (arr[j - gap].firm.CompareTo(ghost.firm) > 0))
                     {
                         arr[j] = arr[j - gap];
                         j -= gap;
@@ -443,27 +497,12 @@ namespace Lab6
                 gap /= 2;
             }
             stopwatch.Stop();
+            Sorts.Time = stopwatch.Elapsed.TotalMilliseconds;
             Console.WriteLine($" Метод ShallSort {stopwatch.Elapsed.TotalMilliseconds} миллисекунд ");
         }
 
 
-        /*
-        public enum TypeSorts 
-        {
-            one,two, three, four, five
-
-        }
-        
-        public static void ResultsTicks(queues arr, TypeSorts a)
-        {
-           
-            switch (a)
-            {
-                case one :
-                    Console.WriteLine("thursty");
-            }
-        }
-        */
     }
 }
+
 
