@@ -16,9 +16,10 @@ namespace Lab6
         public string mark;
         public int id;
 
-       // private string[] firmArr = new string[13] { "cbb", "aa", "a", "abc", "abb", "aba", "acc", "abcd", "add", "bac", "baa", "bcc", "caaa" };
-        private string[] firmArr = new string[13] { "CyberPower", "IPPON", "El-Power", "Philips", "Panasonic", "samsung","ЗИТ","ИМПУЛЬС","Парус электро", "РОТЕК", "ТК Профэнерджи", "Электромаш", "QTECH" };
-        private string[] markArr = new string[4] { "Резервный(Off-Line)", "Линейно-интерактивный(Line-Interactive)", "с двойным преобразованием напряжения(On-Line)", "Cломанный" };
+        private string[] firmArr = new string[13] { "CyberPower", "IPPON", "El-Power", "Philips", "Panasonic", "samsung",
+            "ЗИТ","ИМПУЛЬС","Парус электро", "РОТЕК", "ТК Профэнерджи", "Электромаш", "QTECH" };
+        private string[] markArr = new string[4] { "Резервный(Off-Line)", "Линейно-интерактивный(Line-Interactive)",
+            "с двойным преобразованием напряжения(On-Line)", "Cломанный" };
 
         public PowerSuply()
         {
@@ -29,10 +30,7 @@ namespace Lab6
             mark = markArr[t2];
             Random idRan = new Random();
             id = idRan.Next(100);
-            //only "D", "d", "N", "n", "P", "p", "B", "b", "X" or "x"."
         }
-
-
     }
     [Serializable]
     public class queues
@@ -57,7 +55,6 @@ namespace Lab6
                 Queues[i] = new PowerSuply();
             }
         }
-
         public PowerSuply this[int pos]
         {
             get
@@ -255,7 +252,6 @@ namespace Lab6
                     arr[index - 1] = ghost;
                     index--;
                 }
-                //arr[index].id = value;// Присвоение текущему элементу значения id
             }
             stopwatch.Stop();
             Console.WriteLine($" Метод DirectConnection {stopwatch.Elapsed.TotalMilliseconds} миллисекунд ");
@@ -303,15 +299,12 @@ namespace Lab6
                         swapped = true;
                     }
                 }
-
                 if (!swapped)// Если на проходе не было перестановок, массив уже отсортирован
                 {
                     break;
                 }
-
                 swapped = false;
                 end--;
-
                 // Проход справа налево
                 for (int i = end - 1; i >= start; i--)
                 {
@@ -323,7 +316,6 @@ namespace Lab6
                         swapped = true;
                     }
                 }
-
                 start++;
             }
             stopwatch.Stop();
@@ -445,25 +437,6 @@ namespace Lab6
             stopwatch.Stop();
             Console.WriteLine($" Метод ShallSort {stopwatch.Elapsed.TotalMilliseconds} миллисекунд ");
         }
-
-
-        /*
-        public enum TypeSorts 
-        {
-            one,two, three, four, five
-
-        }
-        
-        public static void ResultsTicks(queues arr, TypeSorts a)
-        {
-           
-            switch (a)
-            {
-                case one :
-                    Console.WriteLine("thursty");
-            }
-        }
-        */
     }
 }
 
