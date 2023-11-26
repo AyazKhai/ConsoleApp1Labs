@@ -29,45 +29,45 @@ namespace Lab6
 
             test1.GetIds();
             Sorts.DirectChooseId(test1);
-            test1.GetIds("\n");
+            //test1.GetRes("\n");
 
             test2.GetIds();
             Sorts.BubblyId(test2);
-            test2.GetIds("\n");
+           // test2.GetRes("\n");
 
             test3.GetIds();
             Sorts.DirectConnectionId(test3);
-            test3.GetIds("\n");
+           // test3.GetRes("\n");
 
             test4.GetIds();
             Sorts.ShakerSortId(test4);
-            test4.GetIds("\n");
+          // test4.GetRes("\n");
 
             test5.GetIds();
             Sorts.ShallSortId(test5);
-            test5.GetIds("\n");
+          //  test5.GetRes("\n");
 
             Console.WriteLine("\n");
 
             test1.GetFirm();
             Sorts.DirectChooseFirm(test1);
-            test1.GetFirm("\n");
+           // test1.GetRes("\n");
 
             test2.GetFirm();
             Sorts.BubblyFirm(test2);
-            test2.GetFirm("\n");
+          //  test2.GetRes("\n");
 
             test3.GetFirm();
             Sorts.DirectConnectionFirm(test3);
-            test3.GetFirm("\n");
+          //  test3.GetRes("\n");
 
             test4.GetFirm();
             Sorts.ShakerSortFirm(test4);
-            test4.GetFirm("\n");
+          //  test4.GetRes("\n");
 
             test5.GetFirm();
             Sorts.ShallSortFirm(test5);
-            test5.GetFirm("\n");
+           // test5.GetRes("\n");
 
             Console.ReadKey();
         }

@@ -77,9 +77,17 @@ namespace Lab6
         {
             for (int i = 0; i < n; i++)
             {
-                Console.WriteLine($"\nФирма: {Queues[i].firm}; Марка: {Queues[i].mark}; Идентифиционный номер: {Queues[i].id}\n");
+                Console.WriteLine($"Фирма: {Queues[i].firm}; Марка: {Queues[i].mark}; Идентифиционный номер: {Queues[i].id}");
             }
 
+        }
+        public void GetRes(string str)//выводит результат(все поля объекта в строчку
+        {
+            for (int i = 0; i < n; i++)
+            {
+                Console.WriteLine($"Фирма: {Queues[i].firm}; Марка: {Queues[i].mark}; Идентифиционный номер: {Queues[i].id}");
+            }
+            Console.Write(str);
         }
         public void GetIds() //выводит поля id 
         {
@@ -439,4 +447,5 @@ namespace Lab6
         }
     }
 }
+
 
