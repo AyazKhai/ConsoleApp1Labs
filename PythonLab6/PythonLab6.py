@@ -1,5 +1,3 @@
-<<<<<<< HEAD
-=======
 ﻿import random
 import time
 
@@ -22,7 +20,7 @@ class queues:
         self.Queues = [PowerSuply() for _ in range(n)]
 
     def __getitem__(self, pos):
-        if pos >= 0 and pos < 30:
+        if pos >= 0 and pos < 100:
             return self.Queues[pos]
         else:
             raise IndexError("Вне диапазона")
@@ -297,6 +295,4 @@ test5.GetRes()
 Sorts.ShallSortFirm(test5)
 test5.GetRes("\n")
 
-
->>>>>>> be530b0 (Commit 26.11)
 
